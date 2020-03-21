@@ -4,10 +4,24 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import {NavLink} from 'react-router-dom';
 import CityLogo from '../ui/icons';
-;
+import {firebase} from '../../firebase'
+
+
+
 
  class Header extends Component {
+    unsubscribeFromAuth = null;
+
+    componentDidMount(){
+        this.unsubscribeFromAuth =firebase.auth().onAuthStateChanged(async userAuth => userAuth)
+
+
+    }
+    componentWillUnmount (){
+        this.unsubscribeFromAuth =null  ;
+    }
     render() {
+        console.log(this.unsubscribeFromAuth);
         return (
            <AppBar
                 position='fixed'
@@ -37,6 +51,15 @@ import CityLogo from '../ui/icons';
                 <NavLink to='/the_matches'>
                     <Button color='inherit'>Matches</Button>
                 </NavLink>
+                { this.unsubscribeFromAuth == null ? 
+
+                    <NavLink to='/sign_in'>
+                    <Button color='inherit'>Sign In</Button>
+                    </NavLink> : null
+                }
+                
+               
+                
                
                 
                 
