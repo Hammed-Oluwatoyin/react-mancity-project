@@ -13,7 +13,7 @@ class Blocks extends Component {
     componentDidMount(){
         firebaseMatches.limitToLast(6).once('value').then((snapshot)=> {
             const matches = firebaseLooper(snapshot);
-            console.log(matches)
+            
 
             this.setState({
                 matches: reverseArray(matches)
@@ -36,7 +36,7 @@ class Blocks extends Component {
     )
 
     render() {
-        console.log(this.state)
+        
         return (
             <div className="home_matches">
                 {this.showMatches(this.state.matches)}

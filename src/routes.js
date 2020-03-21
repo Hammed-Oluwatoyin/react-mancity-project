@@ -14,7 +14,7 @@ import TheTeam from './Components/theTeam';
 import TheMatches from './Components/theMatches';
 import NotFound from './Components/ui/not_found';
 const Routes = (props) => {
-  console.log(props.user);
+  
   return (
     
    <Layout>

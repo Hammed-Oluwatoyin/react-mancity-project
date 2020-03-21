@@ -10,18 +10,21 @@ import {firebase} from '../../firebase'
 
 
  class Header extends Component {
+   state ={
+        currentUser:null
+    }
     unsubscribeFromAuth = null;
 
     componentDidMount(){
-        this.unsubscribeFromAuth =firebase.auth().onAuthStateChanged(async userAuth => userAuth)
+        this.unsubscribeFromAuth =firebase.auth().onAuthStateChanged(async userAuth => this.setState({currentUser:userAuth}))
 
-
+    
     }
     componentWillUnmount (){
         this.unsubscribeFromAuth =null  ;
     }
     render() {
-        console.log(this.unsubscribeFromAuth);
+        
         return (
            <AppBar
                 position='fixed'
@@ -51,11 +54,11 @@ import {firebase} from '../../firebase'
                 <NavLink to='/the_matches'>
                     <Button color='inherit'>Matches</Button>
                 </NavLink>
-                { this.unsubscribeFromAuth == null ? 
+                { this.state.currentUser ? null :
 
                     <NavLink to='/sign_in'>
                     <Button color='inherit'>Sign In</Button>
-                    </NavLink> : null
+                    </NavLink> 
                 }
                 
                
